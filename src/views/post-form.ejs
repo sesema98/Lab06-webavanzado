@@ -7,94 +7,98 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
-  <body>
-    <main class="shell">
-      <section class="page-header">
+  <body class="app-body">
+    <main class="container">
+      <section class="page-header form-header">
         <div>
-          <p class="eyebrow">Formulario</p>
+          <span class="section-label">Formulario</span>
           <h1><%= pageTitle %></h1>
-          <p class="section-copy">
-            Completa los campos del post y guarda los cambios en MongoDB.
+          <p class="intro-text compact-text">
+            Completa los datos del post y guarda los cambios.
           </p>
         </div>
 
-        <div class="toolbar">
+        <div class="header-actions">
           <a class="btn btn-secondary" href="/posts">Volver al listado</a>
         </div>
       </section>
 
-      <% if (errors.length) { %>
-        <div class="alert alert-error">
-          <% errors.forEach((error) => { %>
-            <p><%= error %></p>
-          <% }) %>
-        </div>
-      <% } %>
-
       <section class="form-card">
-        <form class="post-form" action="<%= formAction %>" method="POST">
-          <label>
-            Autor
-            <select name="userId" required>
-              <option value="">Selecciona un usuario</option>
-              <% users.forEach((user) => { %>
-                <option
-                  value="<%= user._id %>"
-                  <%= formData.userId === String(user._id) ? "selected" : "" %>
-                >
-                  <%= `${user.name} ${user.lastName}` %>
-                </option>
+          <% if (errors.length) { %>
+            <div class="alert alert-error">
+              <% errors.forEach((error) => { %>
+                <p><%= error %></p>
               <% }) %>
-            </select>
-          </label>
+            </div>
+          <% } %>
 
-          <label>
-            Titulo
-            <input
-              type="text"
-              name="title"
-              minlength="5"
-              maxlength="30"
-              required
-              value="<%= formData.title %>"
-            />
-          </label>
+          <form class="post-form" action="<%= formAction %>" method="POST">
+            <div class="form-grid">
+              <label>
+                Autor
+                <select name="userId" required>
+                  <option value="">Selecciona un usuario</option>
+                  <% users.forEach((user) => { %>
+                    <option
+                      value="<%= user._id %>"
+                      <%= formData.userId === String(user._id) ? "selected" : "" %>
+                    >
+                      <%= `${user.name} ${user.lastName}` %>
+                    </option>
+                  <% }) %>
+                </select>
+              </label>
 
-          <label>
-            Contenido
-            <textarea name="content" rows="6" minlength="10" required><%= formData.content %></textarea>
-          </label>
+              <label>
+                Titulo
+                <input
+                  type="text"
+                  name="title"
+                  minlength="5"
+                  maxlength="30"
+                  required
+                  value="<%= formData.title %>"
+                />
+              </label>
+            </div>
 
-          <label>
-            Hashtags
-            <input
-              type="text"
-              name="hashtags"
-              placeholder="#mongodb, #nodejs, #crud"
-              value="<%= formData.hashtags %>"
-            />
-          </label>
+            <label>
+              Contenido
+              <textarea name="content" rows="8" minlength="10" required><%= formData.content %></textarea>
+            </label>
 
-          <label>
-            URL de imagen
-            <input
-              type="url"
-              name="imageUrl"
-              placeholder="https://ejemplo.com/imagen.jpg"
-              value="<%= formData.imageUrl %>"
-            />
-          </label>
+            <div class="form-grid">
+              <label>
+                Hashtags
+                <input
+                  type="text"
+                  name="hashtags"
+                  placeholder="#mongodb, #nodejs, #crud"
+                  value="<%= formData.hashtags %>"
+                />
+              </label>
 
-          <div class="toolbar">
-            <button class="btn btn-primary" type="submit"><%= submitLabel %></button>
-            <a class="btn btn-secondary" href="/posts">Cancelar</a>
-          </div>
-        </form>
+              <label>
+                URL de imagen
+                <input
+                  type="url"
+                  name="imageUrl"
+                  placeholder="https://ejemplo.com/imagen.jpg"
+                  value="<%= formData.imageUrl %>"
+                />
+              </label>
+            </div>
+
+            <div class="button-row">
+              <button class="btn btn-primary" type="submit"><%= submitLabel %></button>
+              <a class="btn btn-secondary" href="/posts">Cancelar</a>
+            </div>
+          </form>
       </section>
     </main>
   </body>

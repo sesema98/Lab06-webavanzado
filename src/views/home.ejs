@@ -7,40 +7,42 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
-  <body>
-    <main class="shell shell-home">
+  <body class="app-body">
+    <main class="container home-page">
       <section class="hero-card">
-        <p class="eyebrow">Laboratorio 06</p>
-        <h1>Social Media con Node.js, MongoDB y CRUD web</h1>
-        <p class="hero-copy">
-          Aplicacion construida con Express, EJS y Mongoose para registrar,
-          listar, editar y eliminar publicaciones.
+        <span class="section-label">Laboratorio 06</span>
+        <h1>Aplicacion web con Node.js y MongoDB</h1>
+        <p class="intro-text">
+          Proyecto para registrar, listar, editar y eliminar publicaciones
+          usando Express, EJS y Mongoose.
         </p>
 
-        <div class="hero-actions">
+        <div class="button-row">
           <a class="btn btn-primary" href="/posts">Ver publicaciones</a>
-          <a class="btn btn-secondary" href="/posts/new">Registrar nuevo post</a>
+          <a class="btn btn-secondary" href="/posts/new">Nuevo post</a>
         </div>
+      </section>
 
-        <div class="hero-grid">
-          <article>
-            <span>Base de datos</span>
-            <strong>MongoDB</strong>
-          </article>
-          <article>
-            <span>Motor web</span>
-            <strong>Express + EJS</strong>
-          </article>
-          <article>
-            <span>Modelo ODM</span>
-            <strong>Mongoose</strong>
-          </article>
-        </div>
+      <section class="info-grid">
+        <article class="info-card">
+          <h2>Base de datos</h2>
+          <p>Conexion con MongoDB mediante Mongoose.</p>
+        </article>
+
+        <article class="info-card">
+          <h2>Funcionalidad</h2>
+          <p>CRUD completo de publicaciones desde la web.</p>
+        </article>
+
+        <article class="info-card">
+          <h2>Vistas</h2>
+          <p>Inicio, listado de posts y formulario de registro o edicion.</p>
+        </article>
       </section>
     </main>
   </body>

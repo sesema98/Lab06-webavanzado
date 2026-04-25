@@ -7,23 +7,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
-  <body>
-    <main class="shell">
+  <body class="app-body">
+    <main class="container">
       <section class="page-header">
         <div>
-          <p class="eyebrow">CRUD de Posts</p>
+          <span class="section-label">CRUD de Posts</span>
           <h1>Publicaciones registradas</h1>
-          <p class="section-copy">
-            Lista completa de posts con autor, hashtags, imagen y acciones de edicion.
+          <p class="intro-text compact-text">
+            Lista de posts almacenados en MongoDB.
           </p>
         </div>
 
-        <div class="toolbar">
+        <div class="header-actions">
+          <div class="status-box">
+            <span>Total</span>
+            <strong><%= posts.length %></strong>
+          </div>
+
           <a class="btn btn-secondary" href="/">Inicio</a>
           <a class="btn btn-primary" href="/posts/new">Nuevo post</a>
         </div>
@@ -40,7 +45,7 @@
         </section>
       <% } %>
 
-      <section class="post-grid">
+      <section class="posts-grid">
         <% posts.forEach((post) => { %>
           <article class="post-card">
             <% if (post.imageUrl) { %>
@@ -55,7 +60,7 @@
               <div class="post-meta">
                 <span><%= new Date(post.createdAt).toLocaleString("es-PE") %></span>
                 <% if (post.updatedAt) { %>
-                  <span>Actualizado</span>
+                  <span class="meta-badge">Actualizado</span>
                 <% } %>
               </div>
 
@@ -70,12 +75,12 @@
             </div>
 
             <div class="post-footer">
-              <div>
+              <div class="author-box">
                 <small>Autor</small>
                 <strong><%= post.user ? `${post.user.name} ${post.user.lastName}` : "Sin autor" %></strong>
               </div>
 
-              <div class="card-actions">
+              <div class="button-row">
                 <a class="btn btn-small btn-secondary" href="/posts/<%= post._id %>/edit">Editar</a>
                 <form action="/posts/<%= post._id %>/delete" method="POST">
                   <button class="btn btn-small btn-danger" type="submit">Eliminar</button>
