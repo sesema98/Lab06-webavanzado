@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado de Posts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="page-header">
+        <div>
+          <p class="eyebrow">CRUD de Posts</p>
+          <h1>Publicaciones registradas</h1>
+          <p class="section-copy">
+            Lista completa de posts con autor, hashtags, imagen y acciones de edicion.
+          </p>
+        </div>
+
+        <div class="toolbar">
+          <a class="btn btn-secondary" href="/">Inicio</a>
+          <a class="btn btn-primary" href="/posts/new">Nuevo post</a>
+        </div>
+      </section>
+
+      <% if (message) { %>
+        <div class="alert alert-success"><%= message %></div>
+      <% } %>
+
+      <% if (!posts.length) { %>
+        <section class="empty-state">
+          <h2>No hay publicaciones todavia</h2>
+          <p>Usa el formulario para crear tu primer post.</p>
+        </section>
+      <% } %>
+
+      <section class="post-grid">
+        <% posts.forEach((post) => { %>
+          <article class="post-card">
+            <% if (post.imageUrl) { %>
+              <img class="post-image" src="<%= post.imageUrl %>" alt="Imagen del post" />
+            <% } else { %>
+              <div class="post-image post-image-placeholder">
+                <span>Sin imagen</span>
+              </div>
+            <% } %>
+
+            <div class="post-body">
+              <div class="post-meta">
+                <span><%= new Date(post.createdAt).toLocaleString("es-PE") %></span>
+                <% if (post.updatedAt) { %>
+                  <span>Actualizado</span>
+                <% } %>
+              </div>
+
+              <h2><%= post.title %></h2>
+              <p><%= post.content %></p>
+
+              <div class="hashtags">
+                <% post.hashtags.forEach((tag) => { %>
+                  <span class="chip"><%= tag %></span>
+                <% }) %>
+              </div>
+            </div>
+
+            <div class="post-footer">
+              <div>
+                <small>Autor</small>
+                <strong><%= post.user ? `${post.user.name} ${post.user.lastName}` : "Sin autor" %></strong>
+              </div>
+
+              <div class="card-actions">
+                <a class="btn btn-small btn-secondary" href="/posts/<%= post._id %>/edit">Editar</a>
+                <form action="/posts/<%= post._id %>/delete" method="POST">
+                  <button class="btn btn-small btn-danger" type="submit">Eliminar</button>
+                </form>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </section>
+    </main>
+  </body>
+</html>

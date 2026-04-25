@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pageTitle %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="page-header">
+        <div>
+          <p class="eyebrow">Formulario</p>
+          <h1><%= pageTitle %></h1>
+          <p class="section-copy">
+            Completa los campos del post y guarda los cambios en MongoDB.
+          </p>
+        </div>
+
+        <div class="toolbar">
+          <a class="btn btn-secondary" href="/posts">Volver al listado</a>
+        </div>
+      </section>
+
+      <% if (errors.length) { %>
+        <div class="alert alert-error">
+          <% errors.forEach((error) => { %>
+            <p><%= error %></p>
+          <% }) %>
+        </div>
+      <% } %>
+
+      <section class="form-card">
+        <form class="post-form" action="<%= formAction %>" method="POST">
+          <label>
+            Autor
+            <select name="userId" required>
+              <option value="">Selecciona un usuario</option>
+              <% users.forEach((user) => { %>
+                <option
+                  value="<%= user._id %>"
+                  <%= formData.userId === String(user._id) ? "selected" : "" %>
+                >
+                  <%= `${user.name} ${user.lastName}` %>
+                </option>
+              <% }) %>
+            </select>
+          </label>
+
+          <label>
+            Titulo
+            <input
+              type="text"
+              name="title"
+              minlength="5"
+              maxlength="30"
+              required
+              value="<%= formData.title %>"
+            />
+          </label>
+
+          <label>
+            Contenido
+            <textarea name="content" rows="6" minlength="10" required><%= formData.content %></textarea>
+          </label>
+
+          <label>
+            Hashtags
+            <input
+              type="text"
+              name="hashtags"
+              placeholder="#mongodb, #nodejs, #crud"
+              value="<%= formData.hashtags %>"
+            />
+          </label>
+
+          <label>
+            URL de imagen
+            <input
+              type="url"
+              name="imageUrl"
+              placeholder="https://ejemplo.com/imagen.jpg"
+              value="<%= formData.imageUrl %>"
+            />
+          </label>
+
+          <div class="toolbar">
+            <button class="btn btn-primary" type="submit"><%= submitLabel %></button>
+            <a class="btn btn-secondary" href="/posts">Cancelar</a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
