@@ -62,17 +62,4 @@ db.users.find().pretty()
 db.posts.find().pretty()
 ```
 
-## Capturas para la entrega
 
-Revisa [ENTREGA.md](./ENTREGA.md).
-
-## GitHub
-
-Inicializa el primer commit y sube el proyecto:
-
-```bash
-git add .
-git commit -m "feat: laboratorio mongo node con crud de posts"
-git remote add origin <URL_DE_TU_REPOSITORIO>
-git push -u origin main
-```
